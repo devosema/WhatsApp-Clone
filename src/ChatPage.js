@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
+import { auth ,Provider } from './config/firebase.js';
+import {signOut} from "firebase/auth";
 
 // Components
 import ChatList from "./Components/Chat/ChatList";
@@ -7,13 +8,19 @@ import TopBar from "./Components/Chat/TopBar.js";
 import Personal from "./Components/Chat/Personal.js";
 import ChatField from "./Components/Chat/ChatField.js";
 import Dialog from "./Components/Chat/Dialog.js";
-import { auth ,Provider } from './config/firebase.js';
-import {signOut} from "firebase/auth";
+
+
 import { AuthContext } from "./context/AuthContext";
+import { ChatContext } from "./context/ChatContext";
+
 
 
 export default function ChatPage(){
-    const {currentUser} = useContext(AuthContext)
+    const {currentUser} = useContext(AuthContext);
+    const {data}=useContext(ChatContext);
+
+    console.log(data);
+
     const handleSignOut = () => {
         signOut(auth,Provider);
     }
@@ -24,9 +31,13 @@ export default function ChatPage(){
                 <ChatList />
             </div>
             <div className='right-side'>
-                <Personal />
-                <Dialog />
-                <ChatField />
+                {data.chatId!=="null"&&(
+                    <>
+                        <Personal currentUser={currentUser} data={data} />
+                        <Dialog currentUser={currentUser} data={data} />
+                        <ChatField currentUser={currentUser} data={data} />
+                    </>
+                )}
             </div>
         </div>
     )

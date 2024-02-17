@@ -6,33 +6,37 @@ import { v4 as uuid } from 'uuid';
 import { AuthContext } from '../../context/AuthContext';
 import { ChatContext } from '../../context/ChatContext';
 
-export default function ChatField(){
-    const {currentUser}=useContext(AuthContext);
-    const {data}=useContext(ChatContext);
+export default function ChatField({currentUser,data}){
+    // const {currentUser}=useContext(AuthContext);
+    // const {data}=useContext(ChatContext);
     const [msg, setMsg]=useState();
 
-    const handleSendMsg = async () => {
-        console.log(data.chatId);
-        await updateDoc(doc(db, "chats", data.chatId),{
-            messages: arrayUnion({
-                id: uuid(),
-                text: msg,
-                senderId: currentUser.uid,
-                date: Timestamp.now(),
-            })
-        });
-        await updateDoc(doc(db, "userChats", currentUser.uid),{
-            [data.chatId + ".lastMessage"]:{text: msg},
-            [data.chatId + ".date"]:serverTimestamp(),
-        });
-        await updateDoc(doc(db, "userChats", data.user.uid),{
-            [data.chatId + ".lastMessage"]:{text: msg},
-            [data.chatId + ".date"]:serverTimestamp(),
-        });
-        setMsg("");
+    const handleSendMsg = async (e) => {
+        e.preventDefault();
+        if(msg.length>0){
+            // console.log(data.chatId);
+            await updateDoc(doc(db, "chats", data.chatId),{
+                messages: arrayUnion({
+                    id: uuid(),
+                    text: msg,
+                    senderId: currentUser.uid,
+                    date: Timestamp.now(),
+                })
+            });
+            await updateDoc(doc(db, "userChats", currentUser.uid),{
+                [data.chatId + ".lastMessage"]:{text: msg},
+                [data.chatId + ".date"]:serverTimestamp(),
+            });
+            await updateDoc(doc(db, "userChats", data.user.uid),{
+                [data.chatId + ".lastMessage"]:{text: msg},
+                [data.chatId + ".date"]:serverTimestamp(),
+            });
+            setMsg("");
+        }
+        
     }
     return(
-        <form className='chat-field'>
+        <form className='chat-field' onSubmit={handleSendMsg}>
             <input type='text' placeholder='Type a message' value={msg} onChange={e=>setMsg(e.target.value)} />
             <button type='button' onClick={handleSendMsg}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">

@@ -8,7 +8,7 @@ import ChatPage from './ChatPage';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
-  console.log("user", currentUser);
+  // console.log("user", currentUser);
   // const ProtectedRoute = ({children}) => {
   //   if(!currentUser){
   //     <Navigate to={"/login"} />

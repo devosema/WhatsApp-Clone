@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { ChatContext } from "../../context/ChatContext";
 
-export default function Personal(){
-    const {data}=useContext(ChatContext);
+export default function Personal({currentUser,data}){
+
+    // const {data}=useContext(ChatContext);
+
     return(
         <header className="chat-head">
             <div className='left'>

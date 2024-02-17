@@ -31,13 +31,12 @@ function ChatList(){
     const handleSelect = (userInfo) => {
         dispatch({type:"CHANGE_USER",payload:userInfo})
     }
-
     return(
         <div className='chat-list'>
             <Search />
             <ul>
                 {Object.entries(chats)?.sort((a,b)=>b[1].date-a[1].date).map(chat=>(
-                    <li className='unread' key={chat[0]} onClick={e=>handleSelect(chat[1]?.userInfo)}>
+                    <li key={chat[0]} onClick={e=>handleSelect(chat[1]?.userInfo)}>
                         <div className="left">
                             <img src={chat[1]?.userInfo.photoURL} alt="/" width="60" height="60"/>
                             <div className="info">
@@ -45,10 +44,10 @@ function ChatList(){
                                 <h4 className="LastMessages">{chat[1].lastMessage?.text}</h4>
                             </div>
                         </div>
-                        {/* <div className="right">
-                            <h4 className="LastMessages">test</h4>
-                            <p className="NewMessages">1</p>
-                        </div> */}
+                        <div className="right">
+                            <h4 className="LastMessages">{chat[1].date?.toDate().toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute: '2-digit' })}</h4>
+                            {/* <p className="NewMessages">1</p> */}
+                        </div>
                     </li>
                 ))}
             </ul>

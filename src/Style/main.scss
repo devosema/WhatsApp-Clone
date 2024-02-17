@@ -140,18 +140,19 @@ body{
     margin-top: 35px;
     }
     button{
-    background-color: hsl(142, 70%, 49%);
-    border: 0;
-    color: #111b21;
-    font-weight: bold;
-    border-radius: 3px;
-    font-size: 15px;
-    cursor: pointer;
-    transition: all .3s;
-    position: absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%) scale(1.2);
+      background-color: hsl(142, 70%, 49%);
+      border: 0;
+      color: #111b21;
+      font-weight: bold;
+      border-radius: 3px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.2);
+      font-size: 13px;
     &:hover{
         background-color:hsl(142, 91%, 49%);
         box-shadow: 1px 1px 5px 1px #25d366;
@@ -364,12 +365,22 @@ body{
   color: #aebac1;
   margin:0;
 }
-.chat-list .right .MessagesTime{
-  margin: 0;
-  color: #8696a0;
-  font-size: 13px;
-  padding-top: 6px;
-}
+.chat-list ul li .right{
+  h4{
+    margin: 0;
+    color: #8696a0;
+    font-size: 12px;
+    display: flex;
+    width: fit-content;
+    margin-top: 10px;
+  }
+  .MessagesTime{
+    margin: 0;
+    color: #8696a0;
+    font-size: 13px;
+    padding-top: 6px;
+  }
+} 
 .chat-list .right .NewMessages{
   margin: 0;
   color: #FFF;

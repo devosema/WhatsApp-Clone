@@ -5,14 +5,13 @@ import { db } from '../../config/firebase';
 
 import { AuthContext } from '../../context/AuthContext';
 
-export default function ChatField(){
-
-    const {currentUser}=useContext(AuthContext);
-
-    const {data}=useContext(ChatContext);
+export default function ChatField({currentUser,data}){
     const [messages, setMessages]=useState([]);
 
-    console.log(data);
+    // const {currentUser}=useContext(AuthContext);
+    // const {data}=useContext(ChatContext);
+
+    // console.log(data);
     useEffect(()=>{
         const unsub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
             doc.exists() && setMessages(doc.data().messages);
