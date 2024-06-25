@@ -4,7 +4,8 @@ import {getAuth, GoogleAuthProvider} from 'firebase/auth';
 
 //Init DB
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    // apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    apiKey: "AIzaSyDLTBQxEZH-fzdoDKqImdKLHNRTZZhQUYA",
     authDomain: "whatsapp-clone2-6da71.firebaseapp.com",
     projectId: "whatsapp-clone2-6da71",
     storageBucket: "whatsapp-clone2-6da71.appspot.com",
